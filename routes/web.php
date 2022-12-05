@@ -48,3 +48,6 @@ Route::resource('pasien',PasienController::class);
 
 Route::get('pasien-pdf', [PasienController::class,'pasienPDF']);
 Route::get('pasien-excel', [PasienController::class,'pasienExcel']);
+Auth::routes();
+
+Route::get('/home1', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

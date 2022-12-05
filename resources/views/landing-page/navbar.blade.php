@@ -95,8 +95,30 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+      @guest
+          @if (Route::has('login'))
+                  <a href="{{ route('login') }}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span></a>
+          @endif
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span></a>
+          @else
+          <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  {{ Auth::user()->name }}
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{ route('logout') }}"
+                     onclick="event.preventDefault();
+                                   document.getElementById('logout-form').submit();">
+                      {{ __('Logout') }}
+                  </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                  </form>
+              </div>
+          </li>
+      @endguest
 
     </div>
   </header><!-- End Header -->
@@ -113,5 +135,6 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('template/js/main.js') }}"></script>
+  @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </body>
 </html>
